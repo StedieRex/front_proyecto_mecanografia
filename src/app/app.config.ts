@@ -4,9 +4,14 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
+// 1. Importamos la función de Angular
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), provideClientHydration(withEventReplay())
+    provideRouter(routes), provideClientHydration(withEventReplay()),
+    // 2. Lo agregamos aquí (usamos withFetch para mejor rendimiento con SSR)
+    provideHttpClient(withFetch())
   ]
 };
